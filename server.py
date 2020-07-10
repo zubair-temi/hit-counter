@@ -2,7 +2,7 @@ import config
 import db
 import utils
 from flask import Flask, request, make_response, render_template
-
+import os
 
 app = Flask(__name__, static_url_path='')
 db_connection = db.DbAccess(config.DATABASE_FILENAME)
@@ -104,6 +104,6 @@ def add_header(r):
 
 if __name__ == '__main__':
     ip = '0.0.0.0'
-    port = 8080
+    port = int(os.environ.get('PORT', 8080))
     print("Site starting on http://" + ip + ":" + str(port))
     app.run(host=ip, port=port)
